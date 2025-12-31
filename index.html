@@ -131,21 +131,26 @@
       backdrop-filter: blur(10px);
     }
 
-    table{ width:100%; border-collapse:collapse; }
+    table{ width:100%; border-collapse:collapse; table-layout: fixed; }
     th,td{
       text-align:left;
       padding:12px;
       border-bottom:1px solid rgba(255,255,255,.10);
       vertical-align:top;
       font-size:14px;
+      word-wrap: break-word;
     }
     th{ background: rgba(255,255,255,.08); font-weight:900; }
 
-    /* >>> Horizontal, máx 2 linhas <<<
-       6 colunas: 10 dezenas viram 6+4 (2 linhas) */
+    /* colunas: garante que "Acertos" caiba */
+    th.col-jogo, td.col-jogo { width: 64px; }
+    th.col-acertos, td.col-acertos { width: 64px; text-align:center; }
+    th.col-res, td.col-res { width: 92px; text-align:center; }
+
+    /* horizontal em até 2 linhas */
     .nums{
       display:grid;
-      grid-template-columns: repeat(6, minmax(26px, 1fr));
+      grid-template-columns: repeat(6, minmax(22px, 1fr));
       gap:6px;
       align-content:start;
     }
@@ -170,7 +175,7 @@
 
     .pill{
       display:inline-block;
-      padding:6px 10px;
+      padding:6px 8px;
       border-radius:999px;
       font-size:12px;
       font-weight:900;
@@ -191,10 +196,15 @@
       font-weight:900;
     }
 
-    .debug{
-      margin-top:10px;
-      font-size:12px;
-      opacity:.85;
+    /* AJUSTE MOBILE: reduz tudo pra não cortar "Acertos" */
+    @media (max-width: 420px){
+      th,td{ padding:10px 8px; font-size:13px; }
+      th.col-jogo, td.col-jogo { width: 56px; }
+      th.col-acertos, td.col-acertos { width: 56px; }
+      th.col-res, td.col-res { width: 84px; }
+      .nums{ gap:5px; grid-template-columns: repeat(6, minmax(20px, 1fr)); }
+      .ball{ font-size:12px; }
+      .pill{ font-size:11px; padding:5px 7px; }
     }
   </style>
 </head>
@@ -207,7 +217,6 @@
     <div class="hero">
       <h1>MEGA DA VIRADA <span class="year">2026</span></h1>
       <div class="sub">🎆🥂🍾 Digite as dezenas sorteadas e veja os acertos em verde.</div>
-      <div class="debug" id="jsStatus">JS: OFF</div>
 
       <div class="panel">
         <label for="sorteio">Dezenas sorteadas (6 números, 1 a 60)</label>
@@ -220,86 +229,85 @@
 
         <div id="msg"></div>
 
-        <!-- JOGOS FIXOS NO HTML (NUNCA SOMEM) -->
         <div id="out" class="tableCard">
           <table>
             <thead>
               <tr>
-                <th style="width:16%;">Jogo</th>
+                <th class="col-jogo">Jogo</th>
                 <th>Números</th>
-                <th style="width:14%;">Acertos</th>
-                <th style="width:16%;">Resultado</th>
+                <th class="col-acertos">Acertos</th>
+                <th class="col-res">Resultado</th>
               </tr>
             </thead>
             <tbody>
 
               <tr class="row-jogo">
-                <td><b>Jogo 1</b></td>
+                <td class="col-jogo"><b>Jogo 1</b></td>
                 <td>
                   <div class="nums">
                     <span class="ball" data-num="4">4</span><span class="ball" data-num="6">6</span><span class="ball" data-num="10">10</span><span class="ball" data-num="13">13</span><span class="ball" data-num="27">27</span><span class="ball" data-num="33">33</span>
                     <span class="ball" data-num="35">35</span><span class="ball" data-num="47">47</span><span class="ball" data-num="49">49</span><span class="ball" data-num="54">54</span>
                   </div>
                 </td>
-                <td class="cell-acertos">—</td>
-                <td class="cell-premio">—</td>
+                <td class="cell-acertos col-acertos">—</td>
+                <td class="cell-premio col-res">—</td>
               </tr>
 
               <tr class="row-jogo">
-                <td><b>Jogo 2</b></td>
+                <td class="col-jogo"><b>Jogo 2</b></td>
                 <td>
                   <div class="nums">
                     <span class="ball" data-num="5">5</span><span class="ball" data-num="11">11</span><span class="ball" data-num="12">12</span><span class="ball" data-num="24">24</span><span class="ball" data-num="32">32</span><span class="ball" data-num="48">48</span>
                     <span class="ball" data-num="50">50</span><span class="ball" data-num="51">51</span><span class="ball" data-num="52">52</span><span class="ball" data-num="56">56</span>
                   </div>
                 </td>
-                <td class="cell-acertos">—</td>
-                <td class="cell-premio">—</td>
+                <td class="cell-acertos col-acertos">—</td>
+                <td class="cell-premio col-res">—</td>
               </tr>
 
               <tr class="row-jogo">
-                <td><b>Jogo 3</b></td>
+                <td class="col-jogo"><b>Jogo 3</b></td>
                 <td>
                   <div class="nums">
                     <span class="ball" data-num="7">7</span><span class="ball" data-num="14">14</span><span class="ball" data-num="17">17</span><span class="ball" data-num="25">25</span><span class="ball" data-num="30">30</span><span class="ball" data-num="36">36</span>
                     <span class="ball" data-num="38">38</span><span class="ball" data-num="45">45</span><span class="ball" data-num="57">57</span><span class="ball" data-num="58">58</span>
                   </div>
                 </td>
-                <td class="cell-acertos">—</td>
-                <td class="cell-premio">—</td>
+                <td class="cell-acertos col-acertos">—</td>
+                <td class="cell-premio col-res">—</td>
               </tr>
 
               <tr class="row-jogo">
-                <td><b>Jogo 4</b></td>
+                <td class="col-jogo"><b>Jogo 4</b></td>
                 <td>
                   <div class="nums">
                     <span class="ball" data-num="2">2</span><span class="ball" data-num="14">14</span><span class="ball" data-num="37">37</span><span class="ball" data-num="55">55</span><span class="ball" data-num="56">56</span><span class="ball" data-num="59">59</span>
                   </div>
                 </td>
-                <td class="cell-acertos">—</td>
-                <td class="cell-premio">—</td>
+                <td class="cell-acertos col-acertos">—</td>
+                <td class="cell-premio col-res">—</td>
               </tr>
 
               <tr class="row-jogo">
-                <td><b>Jogo 5</b></td>
+                <td class="col-jogo"><b>Jogo 5</b></td>
                 <td>
                   <div class="nums">
                     <span class="ball" data-num="5">5</span><span class="ball" data-num="7">7</span><span class="ball" data-num="13">13</span><span class="ball" data-num="19">19</span><span class="ball" data-num="20">20</span><span class="ball" data-num="51">51</span>
                   </div>
                 </td>
-                <td class="cell-acertos">—</td>
-                <td class="cell-premio">—</td>
+                <td class="cell-acertos col-acertos">—</td>
+                <td class="cell-premio col-res">—</td>
               </tr>
 
               <tr class="row-jogo">
-                <td><b>Jogo 6</b></td>
+                <td class="col-jogo"><b>Jogo 6</b></td>
                 <td>
                   <div class="nums">
                     <span class="ball" data-num="1">1</span><span class="ball" data-num="3">3</span><span class="ball" data-num="11">11</span><span class="ball" data-num="14">14</span><span class="ball" data-num="23">23</span><span class="ball" data-num="60">60</span>
                   </div>
                 </td>
-                <td class="cell-acertos">—</td>
-                <td class="cell-premio">—</td>
+                <td class="cell-acertos col-acertos">—</td>
+                <td class="cell-premio col-res">—</td>
               </tr>
 
             </tbody>
@@ -311,9 +319,6 @@
   </div>
 
 <script>
-  // indicador pra confirmar que o JS rodou
-  document.getElementById("jsStatus").textContent = "JS: ON";
-
   function parseNums(texto) {
     return texto.trim().split(/[\s,.-]+/)
       .map(n => parseInt(n, 10))
@@ -341,6 +346,7 @@
     limpar();
 
     const nums = parseNums(document.getElementById("sorteio").value);
+
     if (nums.length !== 6) { msg.innerHTML = `<div class="error">Informe exatamente 6 números.</div>`; return; }
 
     const set = new Set(nums);
@@ -356,8 +362,8 @@
       if (set.has(n)) el.classList.add("hit");
     });
 
-    // conta
-    let ganhouEmAlgum = false;
+    // conta e pega máximo
+    let maxHits = 0;
     document.querySelectorAll("tr.row-jogo").forEach(row => {
       const balls = row.querySelectorAll(".ball");
       let hits = 0;
@@ -369,16 +375,23 @@
       const cell = row.querySelector(".cell-premio");
       cell.innerHTML = (hits >= 4) ? `<span class="${p.cls}">${p.txt}</span>` : "—";
 
-      if (hits >= 4) ganhouEmAlgum = true;
+      if (hits > maxHits) maxHits = hits;
     });
 
-    if (!ganhouEmAlgum) {
-      const final = document.createElement("div");
-      final.id = "finalMsg";
-      final.className = "finalMsg";
-      final.innerHTML = `Não foi dessa vez. Vamos ter que trabalhar em 2026. Feliz Ano Novo! 🎆🥂`;
-      document.querySelector(".panel").appendChild(final);
+    // mensagem final com máximo
+    const final = document.createElement("div");
+    final.id = "finalMsg";
+    final.className = "finalMsg";
+
+    if (maxHits === 6) {
+      final.innerHTML = `Maior pontuação: <b>${maxHits}</b><br><br>
+      Parabéns, vocês são os mais novos milionários do Brasil! 🎆🥂🍾`;
+    } else {
+      final.innerHTML = `Maior pontuação: <b>${maxHits}</b><br><br>
+      Infelizmente não foi dessa vez e a Claro agradece. Voltamos à luta em 2026. Feliz ano novo!!!!! 🎆🥂`;
     }
+
+    document.querySelector(".panel").appendChild(final);
   }
 
   document.getElementById("btnConferir").addEventListener("click", conferir);
@@ -386,5 +399,6 @@
     if (e.key === "Enter") conferir();
   });
 </script>
+
 </body>
 </html>
