@@ -1,404 +1,224 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mega da Virada 2026</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mega da Virada 2026</title>
 
-  <style>
-    :root{
-      --gold:#f6d365;
-      --gold2:#fda085;
-      --green:#0f5132;
-      --greenBg:#d1e7dd;
-      --border: rgba(255,255,255,.22);
-      --muted: rgba(255,255,255,.84);
-    }
+<style>
+:root{
+  --gold:#f6d365;
+  --gold2:#fda085;
+  --green:#0f5132;
+  --greenBg:#d1e7dd;
+}
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: Arial, sans-serif;
-      color:#fff;
-      min-height:100vh;
-      overflow-x:hidden;
-      background: radial-gradient(circle at 20% 10%, #ff3b3b 0%, #b10d0d 40%, #3b0000 100%);
-      position:relative;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:#fff;
+  min-height:100vh;
+  background:radial-gradient(circle at 20% 10%,#ff3b3b 0%,#b10d0d 40%,#3b0000 100%);
+}
 
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(255,210,90,.45) 0 2px, transparent 3px),
-        radial-gradient(circle at 70% 25%, rgba(255,255,255,.20) 0 2px, transparent 3px),
-        radial-gradient(circle at 40% 80%, rgba(255,255,255,.14) 0 1px, transparent 2px);
-      opacity:.9;
-      animation: twinkle 4s ease-in-out infinite;
-    }
-    @keyframes twinkle{ 0%,100%{opacity:.65} 50%{opacity:1} }
+.firework{
+  position:fixed;
+  width:520px;height:520px;
+  border-radius:50%;
+  opacity:0;
+  mix-blend-mode:screen;
+  animation:boom 3.6s infinite;
+}
+.fw1{left:-120px;top:-80px;
+  background:radial-gradient(circle,rgba(255,220,120,.9) 0 4px,rgba(255,130,170,.35) 90px,transparent 260px);
+}
+.fw2{right:-160px;top:40px;animation-delay:1.2s;
+  background:radial-gradient(circle,rgba(120,220,255,.9) 0 4px,rgba(140,255,190,.28) 90px,transparent 270px);
+}
+@keyframes boom{
+  0%{opacity:0;transform:scale(.8)}
+  15%{opacity:.9}
+  35%{opacity:.2}
+  100%{opacity:0;transform:scale(1.3)}
+}
 
-    .firework{
-      position:fixed;
-      width:520px;height:520px;
-      border-radius:999px;
-      pointer-events:none;
-      opacity:0;
-      mix-blend-mode:screen;
-      animation: boom 3.6s ease-in-out infinite;
-    }
-    .fw1{ left:-120px; top:-80px;
-      background: radial-gradient(circle, rgba(255,220,120,.95) 0 4px, rgba(255,130,170,.35) 80px, transparent 260px);
-      animation-delay:.2s;
-    }
-    .fw2{ right:-160px; top:40px;
-      background: radial-gradient(circle, rgba(120,220,255,.9) 0 4px, rgba(140,255,190,.28) 90px, transparent 270px);
-      animation-delay:1.2s;
-    }
-    @keyframes boom{
-      0%{ opacity:0; transform:scale(.75); }
-      15%{ opacity:.9; transform:scale(1.05); }
-      35%{ opacity:.15; transform:scale(1.22); }
-      100%{ opacity:0; transform:scale(1.35); }
-    }
+.wrap{max-width:980px;margin:24px auto;padding:16px}
+.card{
+  background:rgba(255,255,255,.12);
+  border-radius:16px;
+  padding:18px;
+  backdrop-filter:blur(10px);
+}
 
-    .wrap{ max-width:980px; margin:26px auto 60px; padding:16px; position:relative; z-index:2; }
-    .hero{
-      padding:22px 18px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
-      box-shadow: 0 16px 40px rgba(0,0,0,.35);
-      backdrop-filter: blur(10px);
-    }
+h1{margin:0;font-size:28px}
+.year{
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  font-weight:900;
+}
 
-    h1{ margin:0; font-size:28px; letter-spacing:.5px; line-height:1.1; }
-    .year{
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      font-weight:900;
-    }
-    .sub{ margin:8px 0 0; color: var(--muted); font-size:14px; }
+.sub{margin:8px 0 12px;opacity:.9}
 
-    .panel{
-      margin-top:14px;
-      padding:14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.18);
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
-    }
+input,button{
+  width:100%;
+  padding:12px;
+  font-size:16px;
+  border-radius:10px;
+  border:none;
+}
+input{
+  background:rgba(255,255,255,.2);
+  color:#fff;
+}
+button{
+  margin-top:10px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  font-weight:900;
+  color:#000;
+  cursor:pointer;
+}
 
-    label{ display:block; margin-bottom:8px; font-weight:800; }
+table{width:100%;border-collapse:collapse;margin-top:16px;table-layout:fixed}
+th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,.2);text-align:left;font-size:14px}
+th.col-jogo,td.col-jogo{width:60px}
+th.col-acertos,td.col-acertos{width:60px;text-align:center}
 
-    input,button{
-      width:100%;
-      padding:12px 12px;
-      font-size:16px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,.25);
-      outline:none;
-    }
-    input{
-      background: rgba(255,255,255,.10);
-      color:#fff;
-    }
-    input::placeholder{ color: rgba(255,255,255,.7); }
+.nums{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(22px,1fr));
+  gap:6px;
+}
 
-    button{
-      margin-top:10px;
-      border:0;
-      cursor:pointer;
-      font-weight:900;
-      color:#1b1b1b;
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
-    }
+.ball{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.25);
+  font-weight:900;
+  font-size:13px;
+}
 
-    .hint{ margin-top:8px; font-size:13px; color: var(--muted); }
-    .error{ margin-top:12px; color:#ffd1d1; font-weight:900; }
-    .ok{ margin-top:12px; color:#bff3cf; font-weight:900; }
+.hit{
+  background:var(--greenBg)!important;
+  color:var(--green)!important;
+}
 
-    .tableCard{
-      margin-top:14px;
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.16);
-      backdrop-filter: blur(10px);
-    }
-
-    table{ width:100%; border-collapse:collapse; table-layout: fixed; }
-    th,td{
-      text-align:left;
-      padding:12px;
-      border-bottom:1px solid rgba(255,255,255,.10);
-      vertical-align:top;
-      font-size:14px;
-      word-wrap: break-word;
-    }
-    th{ background: rgba(255,255,255,.08); font-weight:900; }
-
-    /* colunas: garante que "Acertos" caiba */
-    th.col-jogo, td.col-jogo { width: 64px; }
-    th.col-acertos, td.col-acertos { width: 64px; text-align:center; }
-    th.col-res, td.col-res { width: 92px; text-align:center; }
-
-    /* horizontal em até 2 linhas */
-    .nums{
-      display:grid;
-      grid-template-columns: repeat(6, minmax(22px, 1fr));
-      gap:6px;
-      align-content:start;
-    }
-    .ball{
-      width:100%;
-      aspect-ratio: 1 / 1;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.18);
-      font-weight:900;
-      font-size:13px;
-      color: rgba(255,255,255,.92);
-    }
-    .hit{
-      background: var(--greenBg) !important;
-      border-color: var(--green) !important;
-      color: var(--green) !important;
-    }
-
-    .pill{
-      display:inline-block;
-      padding:6px 8px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.08);
-    }
-    .p-sena{ background: rgba(255,90,90,.18); }
-    .p-quina{ background: rgba(255,220,120,.18); }
-    .p-quadra{ background: rgba(140,255,190,.18); }
-
-    .finalMsg{
-      margin:14px 0 0;
-      padding:14px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.25);
-      background: rgba(0,0,0,.30);
-      text-align:center;
-      font-weight:900;
-    }
-
-    /* AJUSTE MOBILE: reduz tudo pra não cortar "Acertos" */
-    @media (max-width: 420px){
-      th,td{ padding:10px 8px; font-size:13px; }
-      th.col-jogo, td.col-jogo { width: 56px; }
-      th.col-acertos, td.col-acertos { width: 56px; }
-      th.col-res, td.col-res { width: 84px; }
-      .nums{ gap:5px; grid-template-columns: repeat(6, minmax(20px, 1fr)); }
-      .ball{ font-size:12px; }
-      .pill{ font-size:11px; padding:5px 7px; }
-    }
-  </style>
+.finalMsg{
+  margin-top:16px;
+  padding:14px;
+  background:rgba(0,0,0,.35);
+  border-radius:12px;
+  font-weight:900;
+  text-align:center;
+}
+</style>
 </head>
 
 <body>
-  <div class="firework fw1"></div>
-  <div class="firework fw2"></div>
+<div class="firework fw1"></div>
+<div class="firework fw2"></div>
 
-  <div class="wrap">
-    <div class="hero">
-      <h1>MEGA DA VIRADA <span class="year">2026</span></h1>
-      <div class="sub">🎆🥂🍾 Digite as dezenas sorteadas e veja os acertos em verde.</div>
+<div class="wrap">
+  <div class="card">
+    <h1>MEGA DA VIRADA <span class="year">2026</span></h1>
+    <div class="sub">🎆🥂🍾 Digite as dezenas sorteadas e veja os acertos em verde.</div>
 
-      <div class="panel">
-        <label for="sorteio">Dezenas sorteadas (6 números, 1 a 60)</label>
-        <input id="sorteio" type="text"
-               placeholder="Ex: 5 12 23 33 41 58"
-               autocomplete="off" autocorrect="off" autocapitalize="off" />
-        <div class="hint">Separadores aceitos: espaço, vírgula, ponto e hífen.</div>
+    <input id="sorteio" placeholder="Ex: 5 12 23 33 41 58">
+    <button id="btn">Conferir</button>
 
-        <button id="btnConferir" type="button">Conferir</button>
+    <div id="msg"></div>
 
-        <div id="msg"></div>
-
-        <div id="out" class="tableCard">
-          <table>
-            <thead>
-              <tr>
-                <th class="col-jogo">Jogo</th>
-                <th>Números</th>
-                <th class="col-acertos">Acertos</th>
-                <th class="col-res">Resultado</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              <tr class="row-jogo">
-                <td class="col-jogo"><b>Jogo 1</b></td>
-                <td>
-                  <div class="nums">
-                    <span class="ball" data-num="4">4</span><span class="ball" data-num="6">6</span><span class="ball" data-num="10">10</span><span class="ball" data-num="13">13</span><span class="ball" data-num="27">27</span><span class="ball" data-num="33">33</span>
-                    <span class="ball" data-num="35">35</span><span class="ball" data-num="47">47</span><span class="ball" data-num="49">49</span><span class="ball" data-num="54">54</span>
-                  </div>
-                </td>
-                <td class="cell-acertos col-acertos">—</td>
-                <td class="cell-premio col-res">—</td>
-              </tr>
-
-              <tr class="row-jogo">
-                <td class="col-jogo"><b>Jogo 2</b></td>
-                <td>
-                  <div class="nums">
-                    <span class="ball" data-num="5">5</span><span class="ball" data-num="11">11</span><span class="ball" data-num="12">12</span><span class="ball" data-num="24">24</span><span class="ball" data-num="32">32</span><span class="ball" data-num="48">48</span>
-                    <span class="ball" data-num="50">50</span><span class="ball" data-num="51">51</span><span class="ball" data-num="52">52</span><span class="ball" data-num="56">56</span>
-                  </div>
-                </td>
-                <td class="cell-acertos col-acertos">—</td>
-                <td class="cell-premio col-res">—</td>
-              </tr>
-
-              <tr class="row-jogo">
-                <td class="col-jogo"><b>Jogo 3</b></td>
-                <td>
-                  <div class="nums">
-                    <span class="ball" data-num="7">7</span><span class="ball" data-num="14">14</span><span class="ball" data-num="17">17</span><span class="ball" data-num="25">25</span><span class="ball" data-num="30">30</span><span class="ball" data-num="36">36</span>
-                    <span class="ball" data-num="38">38</span><span class="ball" data-num="45">45</span><span class="ball" data-num="57">57</span><span class="ball" data-num="58">58</span>
-                  </div>
-                </td>
-                <td class="cell-acertos col-acertos">—</td>
-                <td class="cell-premio col-res">—</td>
-              </tr>
-
-              <tr class="row-jogo">
-                <td class="col-jogo"><b>Jogo 4</b></td>
-                <td>
-                  <div class="nums">
-                    <span class="ball" data-num="2">2</span><span class="ball" data-num="14">14</span><span class="ball" data-num="37">37</span><span class="ball" data-num="55">55</span><span class="ball" data-num="56">56</span><span class="ball" data-num="59">59</span>
-                  </div>
-                </td>
-                <td class="cell-acertos col-acertos">—</td>
-                <td class="cell-premio col-res">—</td>
-              </tr>
-
-              <tr class="row-jogo">
-                <td class="col-jogo"><b>Jogo 5</b></td>
-                <td>
-                  <div class="nums">
-                    <span class="ball" data-num="5">5</span><span class="ball" data-num="7">7</span><span class="ball" data-num="13">13</span><span class="ball" data-num="19">19</span><span class="ball" data-num="20">20</span><span class="ball" data-num="51">51</span>
-                  </div>
-                </td>
-                <td class="cell-acertos col-acertos">—</td>
-                <td class="cell-premio col-res">—</td>
-              </tr>
-
-              <tr class="row-jogo">
-                <td class="col-jogo"><b>Jogo 6</b></td>
-                <td>
-                  <div class="nums">
-                    <span class="ball" data-num="1">1</span><span class="ball" data-num="3">3</span><span class="ball" data-num="11">11</span><span class="ball" data-num="14">14</span><span class="ball" data-num="23">23</span><span class="ball" data-num="60">60</span>
-                  </div>
-                </td>
-                <td class="cell-acertos col-acertos">—</td>
-                <td class="cell-premio col-res">—</td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-jogo">Jogo</th>
+          <th>Números</th>
+          <th class="col-acertos">Acertos</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
   </div>
+</div>
 
 <script>
-  function parseNums(texto) {
-    return texto.trim().split(/[\s,.-]+/)
-      .map(n => parseInt(n, 10))
-      .filter(n => Number.isInteger(n));
-  }
+const JOGOS=[
+ {nome:"Jogo 1",nums:[4,6,10,13,27,33,35,47,49,54]},
+ {nome:"Jogo 2",nums:[5,11,12,24,32,48,50,51,52,56]},
+ {nome:"Jogo 3",nums:[7,14,17,25,30,36,38,45,57,58]},
+ {nome:"Jogo 4",nums:[2,14,37,55,56,59]},
+ {nome:"Jogo 5",nums:[5,7,13,19,20,51]},
+ {nome:"Jogo 6",nums:[1,3,11,14,23,60]}
+];
 
-  function premio(qtd) {
-    if (qtd === 6) return { txt: "SENA", cls: "pill p-sena" };
-    if (qtd === 5) return { txt: "QUINA", cls: "pill p-quina" };
-    if (qtd === 4) return { txt: "QUADRA", cls: "pill p-quadra" };
-    return { txt: "—", cls: "pill" };
-  }
+const tbody=document.getElementById("tbody");
 
-  function limpar() {
-    document.querySelectorAll(".ball").forEach(b => b.classList.remove("hit"));
-    document.querySelectorAll(".cell-acertos").forEach(c => c.textContent = "—");
-    document.querySelectorAll(".cell-premio").forEach(c => c.textContent = "—");
-    const fm = document.getElementById("finalMsg");
-    if (fm) fm.remove();
-  }
+function render(set=null){
+  tbody.innerHTML="";
+  let maxHits=0;
 
-  function conferir() {
-    const msg = document.getElementById("msg");
-    msg.innerHTML = "";
-    limpar();
+  JOGOS.forEach(j=>{
+    let hits=0;
+    const nums=j.nums.map(n=>{
+      const ok=set&&set.has(n);
+      if(ok) hits++;
+      return `<span class="ball ${ok?"hit":""}">${n}</span>`;
+    }).join("");
 
-    const nums = parseNums(document.getElementById("sorteio").value);
+    if(hits>maxHits) maxHits=hits;
 
-    if (nums.length !== 6) { msg.innerHTML = `<div class="error">Informe exatamente 6 números.</div>`; return; }
-
-    const set = new Set(nums);
-    if (set.size !== 6) { msg.innerHTML = `<div class="error">Não repita números.</div>`; return; }
-
-    if ([...set].some(n => n < 1 || n > 60)) { msg.innerHTML = `<div class="error">Os números devem estar entre 1 e 60.</div>`; return; }
-
-    msg.innerHTML = `<div class="ok">Sorteio informado: <b>${nums.join(" ")}</b></div>`;
-
-    // pinta
-    document.querySelectorAll(".ball").forEach(el => {
-      const n = parseInt(el.dataset.num, 10);
-      if (set.has(n)) el.classList.add("hit");
-    });
-
-    // conta e pega máximo
-    let maxHits = 0;
-    document.querySelectorAll("tr.row-jogo").forEach(row => {
-      const balls = row.querySelectorAll(".ball");
-      let hits = 0;
-      balls.forEach(b => { if (b.classList.contains("hit")) hits++; });
-
-      row.querySelector(".cell-acertos").textContent = hits;
-
-      const p = premio(hits);
-      const cell = row.querySelector(".cell-premio");
-      cell.innerHTML = (hits >= 4) ? `<span class="${p.cls}">${p.txt}</span>` : "—";
-
-      if (hits > maxHits) maxHits = hits;
-    });
-
-    // mensagem final com máximo
-    const final = document.createElement("div");
-    final.id = "finalMsg";
-    final.className = "finalMsg";
-
-    if (maxHits === 6) {
-      final.innerHTML = `Maior pontuação: <b>${maxHits}</b><br><br>
-      Parabéns, vocês são os mais novos milionários do Brasil! 🎆🥂🍾`;
-    } else {
-      final.innerHTML = `Maior pontuação: <b>${maxHits}</b><br><br>
-      Infelizmente não foi dessa vez e a Claro agradece. Voltamos à luta em 2026. Feliz ano novo!!!!! 🎆🥂`;
-    }
-
-    document.querySelector(".panel").appendChild(final);
-  }
-
-  document.getElementById("btnConferir").addEventListener("click", conferir);
-  document.getElementById("sorteio").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") conferir();
+    tbody.innerHTML+=`
+      <tr>
+        <td class="col-jogo">${j.nome}</td>
+        <td><div class="nums">${nums}</div></td>
+        <td class="col-acertos">${set?hits:"—"}</td>
+      </tr>`;
   });
-</script>
 
+  const msg=document.getElementById("msg");
+  msg.innerHTML="";
+
+  if(set){
+    let texto="";
+    if(maxHits===6){
+      texto=`Maior pontuação: 6 (SENA)<br><br>
+      Parabéns, vocês são os mais novos milionários do Brasil! 🎆🥂🍾`;
+    }else if(maxHits===5){
+      texto=`Maior pontuação: 5 (QUINA)<br><br>
+      Infelizmente não foi dessa vez e a Claro agradece.
+      Voltamos à luta em 2026. Feliz ano novo!!!!! 🎆🥂`;
+    }else if(maxHits===4){
+      texto=`Maior pontuação: 4 (QUADRA)<br><br>
+      Infelizmente não foi dessa vez e a Claro agradece.
+      Voltamos à luta em 2026. Feliz ano novo!!!!! 🎆🥂`;
+    }else{
+      texto=`Maior pontuação: ${maxHits}<br><br>
+      Infelizmente não foi dessa vez e a Claro agradece.
+      Voltamos à luta em 2026. Feliz ano novo!!!!! 🎆🥂`;
+    }
+    msg.innerHTML=`<div class="finalMsg">${texto}</div>`;
+  }
+}
+
+render();
+
+document.getElementById("btn").addEventListener("click",()=>{
+  const nums=document.getElementById("sorteio").value
+    .split(/[\s,.-]+/).map(n=>parseInt(n,10))
+    .filter(n=>n>=1&&n<=60);
+
+  if(nums.length!==6||new Set(nums).size!==6){
+    alert("Digite exatamente 6 números válidos");
+    return;
+  }
+  render(new Set(nums));
+});
+</script>
 </body>
 </html>
